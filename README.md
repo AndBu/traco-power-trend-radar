@@ -1,13 +1,19 @@
 # Motivation
 
-At [Zalando](http://zalando.de), we maintain a [public Tech
-Radar](http://zalando.github.io/tech-radar/) to help our engineering teams
-align on technology choices. It is based on the [pioneering work
-by ThoughtWorks](https://www.thoughtworks.com/radar).
+At [Traco Power](http://tracopower.com), we maintain a Trend Radar to help our stakeholders align on important trends along our value chain.
+It is based on the [Zalando Tech Radar](http://zalando.github.io/tech-radar/), which itself is based on the [pioneering work by ThoughtWorks](https://www.thoughtworks.com/radar).
 
-This repository contains the code to generate the visualization:
-[`radar.js`](/docs/radar.js) (based on [d3.js v4](https://d3js.org)).
-Feel free to use and adapt it for your own purposes.
+Our version includes changes that make working with general trends (as opposed to technology trends) easier for us:
+* Additional information about each trend opens in a modal window when clicking on an entry or a blip
+* An Excel file with a proof-of-concept VBA macro to export trend entries is included. The file can be used to populate the radar. It is not encouraged to rely on Excel to keep the radar up-to-date, but it makes it a lot easier to test out the radar before deploying it.
+* The definition of the "triangles" is now user configurable (previously, it was hard-coded to "moved up" and "moved down")
+
+**WARNING, this repository is not actively maintained. The code is posted here to give back to the community.**
+
+* If the above changes **are** important to you, consider forking the repository to build on it and keep it in sync with the original [Zalando Tech Radar](http://zalando.github.io/tech-radar/) yourself.
+* If the above changes **are not** important to you, we encourage you to work with the original [Zalando Tech Radar](http://zalando.github.io/tech-radar/) or another trend radar instead.
+
+This repository contains the code to generate the visualization: [`radar.js`](/docs/radar.js) (based on [d3.js v4](https://d3js.org)). Feel free to use and adapt it for your own purposes.
 
 ## Usage
 
@@ -15,13 +21,14 @@ Feel free to use and adapt it for your own purposes.
 
 ```html
 <script src="https://d3js.org/d3.v4.min.js"></script>
-<script src="http://zalando.github.io/tech-radar/release/radar-0.7.js"></script>
+<script src="path/to/repository/docs/release/traco-radar-0.7.js"></script>
 ```
 
-2. insert an empty `svg` tag:
+2. insert an empty `svg` tag for the radar and an empty  `div` tag for the modal and assign the following ids:
 
 ```html
 <svg id="radar"></svg>
+<div id="modal"></div>
 ```
 
 3. configure the radar visualization:
@@ -29,6 +36,7 @@ Feel free to use and adapt it for your own purposes.
 ```js
 radar_visualization({
   svg_id: "radar",
+  modal_id: "modal",
   width: 1450,
   height: 1000,
   colors: {
@@ -49,6 +57,8 @@ radar_visualization({
     { name: "THIRD",  color: "#c7ba00" },
     { name: "OUTER",  color: "#e09b96" }
   ],
+  moved_up: "moved up",
+  moved_down: "moved down",
   print_layout: true,
   links_in_new_tabs: true,
   entries: [
@@ -67,8 +77,8 @@ radar_visualization({
 
 Entries are positioned automatically so that they don't overlap.
 
-As a working example, you can check out `docs/index.html` &mdash; the source of our [public Tech
-Radar](http://zalando.github.io/tech-radar/).
+As a comparable working example, you can check out `docs/index.html` in the source files of the [Traco Power Trend Radar]("https://github.com/AndBu/traco-power-trend-radar")
+
 
 ## Local Development
 
@@ -95,7 +105,8 @@ http://localhost:3000/
 ```
 The MIT License (MIT)
 
-Copyright (c) 2017-2022 Zalando SE
+Copyright (c) 2021-2023 André Buffing - Traco Electronic AG 
+Copyright (c) 2017-2023 Zalando SE
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
